@@ -16,6 +16,7 @@ const dnsLookup = promisify(dns.lookup);
 
 export const preservedUrls = [
   "login",
+  "finish-oidc-login",
   "logout",
   "signup",
   "reset-password",

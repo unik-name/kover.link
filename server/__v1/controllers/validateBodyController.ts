@@ -44,6 +44,7 @@ export const validateBody = (req, res, next) => {
 
 export const preservedUrls = [
   "login",
+  "finish-oidc-login",
   "logout",
   "signup",
   "reset-password",
