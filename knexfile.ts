@@ -4,11 +4,11 @@ module.exports = {
   production: {
     client: "postgresql",
     connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      port: env.DB_PORT,
-      password: env.DB_PASSWORD,
+      host: env.POSTGRESQL_ADDON_HOST,
+      database: env.POSTGRESQL_ADDON_DB,
+      user: env.POSTGRESQL_ADDON_USER,
+      port: env.POSTGRESQL_ADDON_PORT,
+      password: env.POSTGRESQL_ADDON_PASSWORD,
       ssl: env.DB_SSL,
     },
     migrations: {

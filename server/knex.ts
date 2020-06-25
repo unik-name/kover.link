@@ -5,11 +5,11 @@ import env from "./env";
 const db = knex({
   client: "postgres",
   connection: {
-    host: env.DB_HOST,
-    port: env.DB_PORT,
-    database: env.DB_NAME,
-    user: env.DB_USER,
-    password: env.DB_PASSWORD,
+    host: env.POSTGRESQL_ADDON_HOST,
+    port: env.POSTGRESQL_ADDON_PORT,
+    database: env.POSTGRESQL_ADDON_DB,
+    user: env.POSTGRESQL_ADDON_USER,
+    password: env.POSTGRESQL_ADDON_PASSWORD,
     ssl: env.DB_SSL,
     pool: {
       min: env.DB_POOL_MIN,

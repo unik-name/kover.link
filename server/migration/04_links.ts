@@ -20,10 +20,10 @@ const neo4j = NEO4J.driver(
 const postgres = knex({
   client: "postgres",
   connection: {
-    host: env.DB_HOST,
-    database: env.DB_NAME,
-    user: env.DB_USER,
-    password: env.DB_PASSWORD
+    host: env.POSTGRESQL_ADDON_HOST,
+    database: env.POSTGRESQL_ADDON_DB,
+    user: env.POSTGRESQL_ADDON_USER,
+    password: env.POSTGRESQL_ADDON_PASSWORD
   }
 });
 
