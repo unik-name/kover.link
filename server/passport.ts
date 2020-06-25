@@ -16,7 +16,7 @@ passport.use(
   new JwtStrategy(jwtOptions, async (payload, done) => {
     try {
       const user = await query.user.find({
-        email: payload.sub,
+        email: payload.sub || null,
         sub: payload.oidc_sub
       });
       if (!user) return done(null, false);
