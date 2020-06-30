@@ -13,7 +13,8 @@
     "migrate": "knex migrate:up --env production",
     "lint": "eslint server/ --ext .js,.ts --fix",
     "lint:nofix": "eslint server/ --ext .js,.ts",
-    "docs:build": "cd docs/api && tsc generate.ts --resolveJsonModule && node generate && cd ../.."
+    "docs:build": "cd docs/api && tsc generate.ts --resolveJsonModule && node generate && cd ../..",
+    "install": "npm run build"
   },
   "husky": {
     "hooks": {
