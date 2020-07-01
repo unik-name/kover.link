@@ -124,8 +124,7 @@ export const signup: Handler = async (req, res) => {
     req.user
   );
 
-  console.log("RE-ACTIVATE MAIL VERIFICATION : ", user.verification_token);
-  // await mail.verification(user);
+  await mail.verification(user);
 
   return res.status(201).send({ message: "Verification email has been sent." });
 };
