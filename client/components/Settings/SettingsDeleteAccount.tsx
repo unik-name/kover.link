@@ -52,7 +52,7 @@ const SettingsDeleteAccount: FC = () => {
       <H2 mb={4} bold>
         Delete account
       </H2>
-      <Text mb={4}>Delete your account from {process.env.SITE_NAME}.</Text>
+      <Text mb={4}>Delete your account from {process.env.NEXT_PUBLIC_SITE_NAME}.</Text>
       <Text
         {...label("password")}
         as="label"

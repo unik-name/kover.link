@@ -127,8 +127,8 @@ const LoginPage = () => {
                   height={[44, 56]}
                   width="100%"
                   >
-                  { process.env.OIDC_BUTTON_LOGO_URL ? (
-                    <OidcButtonLogo src={process.env.OIDC_BUTTON_LOGO_URL} />
+                  { process.env.NEXT_PUBLIC_OIDC_BUTTON_LOGO_URL ? (
+                    <OidcButtonLogo src={process.env.NEXT_PUBLIC_OIDC_BUTTON_LOGO_URL} />
                   ) : (
                     <Icon
                       name="login"
@@ -136,7 +136,7 @@ const LoginPage = () => {
                       mr={2}
                       />
                   )}
-                  { process.env.OIDC_BUTTON_LABEL }
+                  { process.env.NEXT_PUBLIC_OIDC_BUTTON_LABEL }
                 </Button>
               </ALink>
             </OidcLogin>

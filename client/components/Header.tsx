@@ -101,7 +101,7 @@ const Header: FC = () => {
             }}
           >
             <img src="/images/logo.svg" alt="" />
-            {process.env.SITE_NAME}
+            {process.env.NEXT_PUBLIC_SITE_NAME}
           </a>
         </LogoImage>
         {!isMobile && (

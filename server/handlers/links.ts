@@ -257,7 +257,7 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
   // 1. If custom domain, get domain info
   const { host } = req.headers;
   const domain =
-    host !== env.DEFAULT_DOMAIN
+    host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN
       ? await query.domain.find({ address: host })
       : null;
 
@@ -365,7 +365,7 @@ export const redirectCustomDomain: Handler = async (req, res, next) => {
     path
   } = req;
 
-  if (host === env.DEFAULT_DOMAIN) {
+  if (host === env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
     return next();
   }
 
@@ -378,7 +378,7 @@ export const redirectCustomDomain: Handler = async (req, res, next) => {
     const domain = await query.domain.find({ address: host });
     const redirectURL = domain
       ? domain.homepage
-      : `https://${env.DEFAULT_DOMAIN + path}`;
+      : `https://${env.NEXT_PUBLIC_DEFAULT_DOMAIN + path}`;
 
     return res.redirect(301, redirectURL);
   }

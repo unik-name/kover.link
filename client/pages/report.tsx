@@ -57,7 +57,7 @@ const ReportPage = () => {
         >
           <TextInput
             {...text("url")}
-            placeholder={`${process.env.DEFAULT_DOMAIN}/example`}
+            placeholder={`${process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}/example`}
             height={[44, 54]}
             width={[1, 1 / 2]}
             flex="0 0 auto"

@@ -85,10 +85,10 @@ export const validateUrl: RequestHandler = async (req, res, next) => {
 
   // If target is the URL shortener itself
   const { host } = URL.parse(addProtocol(req.body.target));
-  if (host === env.DEFAULT_DOMAIN) {
-    return res
-      .status(400)
-      .json({ error: `${env.DEFAULT_DOMAIN} URLs are not allowed.` });
+  if (host === env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
+    return res.status(400).json({
+      error: `${env.NEXT_PUBLIC_DEFAULT_DOMAIN} URLs are not allowed.`
+    });
   }
 
   // Validate password length
@@ -157,7 +157,7 @@ export const malwareCheck = async (user: User, target: string) => {
     `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${env.GOOGLE_SAFE_BROWSING_KEY}`,
     {
       client: {
-        clientId: env.DEFAULT_DOMAIN.toLowerCase().replace(".", ""),
+        clientId: env.NEXT_PUBLIC_DEFAULT_DOMAIN.toLowerCase().replace(".", ""),
         clientVersion: "1.0.0"
       },
       threatInfo: {

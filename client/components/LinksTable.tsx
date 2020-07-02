@@ -325,7 +325,7 @@ const Row: FC<RowProps> = ({ index, link, setDeleteModal }) => {
                   fontSize={[14, 15]}
                   bold
                 >
-                  {link.domain || process.env.DEFAULT_DOMAIN}/
+                  {link.domain || process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}/
                 </Text>
                 <Flex as="form">
                   <TextInput

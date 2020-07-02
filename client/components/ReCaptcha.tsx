@@ -12,7 +12,7 @@ const ReCaptcha = () => {
       margin="54px 0 16px"
       id="g-recaptcha"
       className="g-recaptcha"
-      data-sitekey={process.env.RECAPTCHA_SITE_KEY}
+      data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
       data-callback="recaptchaCallback"
       data-size="invisible"
       data-badge="inline"

@@ -71,7 +71,7 @@ const SettingsDomain: FC = () => {
       </H2>
       <Text mb={3}>
         You can set a custom domain for your short URLs, so instead of{" "}
-        <b>{process.env.DEFAULT_DOMAIN}/shorturl</b> you can have{" "}
+        <b>{process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}/shorturl</b> you can have{" "}
         <b>example.com/shorturl.</b>
       </Text>
       <Text mb={4}>
@@ -92,7 +92,7 @@ const SettingsDomain: FC = () => {
               <tr key={d.address}>
                 <Td width={2 / 5}>{d.address}</Td>
                 <Td width={2 / 5}>
-                  {d.homepage || process.env.DEFAULT_DOMAIN}
+                  {d.homepage || process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}
                 </Td>
                 <Td width={1 / 5} justifyContent="center">
                   <Icon

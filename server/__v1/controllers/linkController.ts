@@ -115,7 +115,7 @@ export const goToLink: Handler = async (req, res, next) => {
   const { host } = req.headers;
   const reqestedId = req.params.id || req.body.id;
   const address = reqestedId.replace("+", "");
-  const customDomain = host !== env.DEFAULT_DOMAIN && host;
+  const customDomain = host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN && host;
   const isBot = isbot(req.headers["user-agent"]);
 
   let domain;
@@ -126,7 +126,7 @@ export const goToLink: Handler = async (req, res, next) => {
   const link = await findLink({ address, domain_id: domain && domain.id });
 
   if (!link) {
-    if (host !== env.DEFAULT_DOMAIN) {
+    if (host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
       if (!domain || !domain.homepage) return next();
       return res.redirect(301, domain.homepage);
     }
@@ -210,7 +210,7 @@ export const setCustomDomain: Handler = async (req, res) => {
       .status(400)
       .json({ error: "Maximum custom domain length is 40." });
   }
-  if (customDomain === env.DEFAULT_DOMAIN) {
+  if (customDomain === env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
     return res.status(400).json({ error: "You can't use default domain." });
   }
   const isValidHomepage =
@@ -260,7 +260,7 @@ export const deleteCustomDomain: Handler = async (req, res) => {
 export const customDomainRedirection: Handler = async (req, res, next) => {
   const { headers, path } = req;
   if (
-    headers.host !== env.DEFAULT_DOMAIN &&
+    headers.host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN &&
     (path === "/" ||
       preservedUrls
         .filter(l => l !== "url-password")
@@ -269,7 +269,8 @@ export const customDomainRedirection: Handler = async (req, res, next) => {
     const domain = await getDomain({ address: headers.host });
     return res.redirect(
       301,
-      (domain && domain.homepage) || `https://${env.DEFAULT_DOMAIN + path}`
+      (domain && domain.homepage) ||
+        `https://${env.NEXT_PUBLIC_DEFAULT_DOMAIN + path}`
     );
   }
   return next();
@@ -284,7 +285,8 @@ export const deleteUserLink: Handler = async (req, res) => {
 
   const response = await deleteLink({
     address: id,
-    domain: !domain || domain === env.DEFAULT_DOMAIN ? null : domain,
+    domain:
+      !domain || domain === env.NEXT_PUBLIC_DEFAULT_DOMAIN ? null : domain,
     user_id: req.user.id
   });
 
@@ -301,7 +303,8 @@ export const getLinkStats: Handler = async (req, res) => {
   }
 
   const { hostname } = URL.parse(req.query.domain);
-  const hasCustomDomain = req.query.domain && hostname !== env.DEFAULT_DOMAIN;
+  const hasCustomDomain =
+    req.query.domain && hostname !== env.NEXT_PUBLIC_DEFAULT_DOMAIN;
   const customDomain = hasCustomDomain
     ? (await getDomain({ address: req.query.domain })) || ({ id: -1 } as Domain)
     : ({} as Domain);
@@ -339,9 +342,9 @@ export const reportLink: Handler = async (req, res) => {
   }
 
   const { hostname } = URL.parse(req.body.link);
-  if (hostname !== env.DEFAULT_DOMAIN) {
+  if (hostname !== env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
     return res.status(400).json({
-      error: `You can only report a ${env.DEFAULT_DOMAIN} link`
+      error: `You can only report a ${env.NEXT_PUBLIC_DEFAULT_DOMAIN} link`
     });
   }
 
