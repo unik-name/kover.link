@@ -15,6 +15,8 @@ export const ip: Handler = (req, res, next) => {
 export const error: ErrorRequestHandler = (error, req, res, next) => {
   if (env.isDev) {
     signale.fatal(error);
+  } else {
+    console.error(error);
   }
 
   if (error instanceof CustomError) {
