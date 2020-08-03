@@ -15,7 +15,6 @@ export interface Auth {
   isAuthenticated: Computed<Auth, boolean>;
   add: Action<Auth, TokenPayload>;
   logout: Action<Auth>;
-  login: Thunk<Auth, { email: string; password: string }>;
   renew: Thunk<Auth>;
 }
 
@@ -37,13 +36,6 @@ export const auth: Auth = {
     state.email = null;
     state.isAdmin = false;
     state.sub = null;
-  }),
-  login: thunk(async (actions, payload) => {
-    const res = await axios.post(APIv2.AuthLogin, payload);
-    const { token } = res.data;
-    cookie.set("token", token, { expires: 7 });
-    const tokenPayload: TokenPayload = decode(token);
-    actions.add(tokenPayload);
   }),
   renew: thunk(async actions => {
     const res = await axios.post(APIv2.AuthRenew, null, getAxiosConfig());

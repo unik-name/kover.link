@@ -52,7 +52,7 @@ const StatsPage: NextPage<Props> = ({ id }) => {
     errorMessage = (
       <Flex mt={3}>
         <Icon name="x" size={32} mr={3} stroke={Colors.TrashIcon} />
-        <H2>You need to login to view stats.</H2>
+        <H2>You need to login with your @unikname to view stats.</H2>
       </Flex>
     );
   }
