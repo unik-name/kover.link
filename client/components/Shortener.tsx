@@ -1,11 +1,11 @@
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useFormState } from "react-use-form-state";
 import { Flex } from "reflexbox/styled-components";
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { useStoreActions, useStoreState } from "../store";
-import { Checkbox, Select, TextInput } from "./Input";
+import { Checkbox, TextInput } from "./Input";
 import { Col, RowCenterH, RowCenter } from "./Layout";
 import { useMessage, useCopy } from "../hooks";
 import { removeProtocol } from "../utils";
@@ -61,7 +61,7 @@ const Shortener = () => {
   const domains = useStoreState(s => s.settings.domains);
   const submit = useStoreActions(s => s.links.submit);
   const [link, setLink] = useState<Link | null>(null);
-  const [message, setMessage] = useMessage(3000);
+  const [message, setMessage] = useMessage(10000);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useCopy();
   const [formState, { raw, password, text, select, label }] = useFormState<
@@ -72,7 +72,7 @@ const Shortener = () => {
       withIds: true,
       onChange(e, stateValues, nextStateValues) {
         if (stateValues.showAdvanced && !nextStateValues.showAdvanced) {
-          formState.clear();
+          // formState.clear();
           formState.setField("target", stateValues.target);
         }
       }
@@ -85,8 +85,16 @@ const Shortener = () => {
       setLink(link);
       formState.clear();
     } catch (err) {
+      let message;
+
+      if (err?.response?.status === 401) {
+        message = "You need to log in or sign up with your @unikname to use kover.link"
+      } else {
+        message = err?.response?.data?.error;
+      }
+
       setMessage(
-        err?.response?.data?.error || "Couldn't create the short link."
+        message || "Couldn't create the short link."
       );
     }
     setLoading(false);
@@ -121,9 +129,9 @@ const Shortener = () => {
 
   const title = !link && (
     <H1 fontSize={[25, 27, 32]} light>
-      Kutt your links{" "}
+      Kover your links{" "}
       <Span style={{ borderBottom: "2px dotted #999" }} light>
-        shorter
+        and shorten it!
       </Span>
       .
     </H1>
@@ -225,7 +233,7 @@ const Shortener = () => {
           onChange: e => {
             if (!isAuthenticated) {
               setMessage(
-                "You need to log in or sign up to use advanced options."
+                "You need to log in or sign up with your @unikname to use advanced options."
               );
               return false;
             }
@@ -239,33 +247,6 @@ const Shortener = () => {
       />
       {formState.values.showAdvanced && (
         <Flex mt={4} flexDirection={["column", "row"]}>
-          <Col mb={[3, 0]}>
-            <Text
-              as="label"
-              {...label("domain")}
-              fontSize={[14, 15]}
-              mb={2}
-              bold
-            >
-              Domain
-            </Text>
-            <Select
-              {...select("domain")}
-              data-lpignore
-              pl={[3, 24]}
-              pr={[3, 24]}
-              fontSize={[14, 15]}
-              height={[40, 44]}
-              width={[170, 200]}
-              options={[
-                { key: defaultDomain, value: "" },
-                ...domains.map(d => ({
-                  key: d.address,
-                  value: d.address
-                }))
-              ]}
-            />
-          </Col>
           <Col mb={[3, 0]} ml={[0, 24]}>
             <Text
               as="label"

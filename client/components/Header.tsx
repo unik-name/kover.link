@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { RowCenterV } from "./Layout";
 import { Button } from "./Button";
 import ALink from "./ALink";
+import UniknameLoginButton from "../components/UniknamLoginButton";
 
 const Li = styled(Flex).attrs({ ml: [12, 24, 32] })`
   a {
@@ -51,11 +52,7 @@ const Header: FC = () => {
 
   const login = !isAuthenticated && (
     <Li>
-      <Link href="/login">
-        <ALink href="/login" title="login / signup" forButton>
-          <Button height={[32, 40]}>Login / Sign up</Button>
-        </ALink>
-      </Link>
+      <UniknameLoginButton />
     </Li>
   );
   const logout = isAuthenticated && (

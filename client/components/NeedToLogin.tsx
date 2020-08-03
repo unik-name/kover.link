@@ -1,11 +1,10 @@
 import React from "react";
-import Link from "next/link";
 import styled from "styled-components";
 import { Flex } from "reflexbox/styled-components";
 
-import { Button } from "./Button";
 import { fadeIn } from "../helpers/animations";
 import { Col } from "./Layout";
+import UniknameLoginButton from "./UniknamLoginButton";
 
 const Wrapper = styled(Flex).attrs({
   width: 1200,
@@ -65,11 +64,7 @@ const NeedToLogin = () => (
       <Title>
         Manage links, set custom <b>domains</b> and view <b>stats</b>.
       </Title>
-      <Link href="/login">
-        <a href="/login" title="login / signup">
-          <Button>Login / Signup</Button>
-        </a>
-      </Link>
+      <UniknameLoginButton />
     </Col>
     <Image src="/images/callout.png" />
   </Wrapper>
