@@ -24,16 +24,36 @@ const Footer: FC = () => {
       {!isAuthenticated && <ReCaptcha />}
       <Text fontSize={[12, 13]} py={2}>
         Made with love by{" "}
-        <ALink href="//thedevs.network/" title="The Devs">
-          The Devs
+        <ALink
+          href="https://www.unikname.com/about"
+          title="Unikname Team"
+          target="_blank"
+        >
+          Unikname Team
         </ALink>
         .{" | "}
+        <ALink
+          href="https://github.com/spacelephant/kover.link"
+          title="GitHub"
+          target="_blank"
+        >
+          GitHub
+        </ALink>
+        {" | "}
+        <ALink
+          href="https://www.unikname.com"
+          title="Powered by Unikname"
+          target="_blank"
+        >
+         Powered by Unikname
+        </ALink>
+        {" | "}
         <ALink
           href="https://github.com/thedevs-network/kutt"
           title="GitHub"
           target="_blank"
         >
-          GitHub
+          Kutt fork
         </ALink>
         {" | "}
         <ALink href="/terms" title="Terms of Service">
