@@ -1,7 +1,6 @@
 import React from "react";
 
 import NeedToLogin from "../components/NeedToLogin";
-import Extensions from "../components/Extensions";
 import LinksTable from "../components/LinksTable";
 import AppWrapper from "../components/AppWrapper";
 import Shortener from "../components/Shortener";
@@ -18,7 +17,6 @@ const Homepage = () => {
       {!isAuthenticated && <NeedToLogin />}
       {isAuthenticated && <LinksTable />}
       <Features />
-      <Extensions />
       <Footer />
     </AppWrapper>
   );
