@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { Flex } from 'reflexbox/styled-components';
 
 const ReCaptcha = () => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== 'production'
+    || !process.env.RECAPTCHA_SECRET_KEY
+    || !process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
     return null;
   }
 
