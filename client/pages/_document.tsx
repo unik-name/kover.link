@@ -74,17 +74,22 @@ class AppDocument extends Document<Props> {
 
           {this.props.styleTags}
 
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `window.recaptchaCallback = function() { window.isCaptchaReady = true; }`
-            }}
-          />
+          {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY &&
+            (<div>
+                <script
+                  dangerouslySetInnerHTML={{
+                    __html: `window.recaptchaCallback = function() { window.isCaptchaReady = true; }`
+                  }}
+                  />
 
-          <script
-            src="https://www.google.com/recaptcha/api.js?render=explicit"
-            async
-            defer
-          />
+                <script
+                  src="https://www.google.com/recaptcha/api.js?render=explicit"
+                  async
+                  defer
+                  />
+            </div>
+            )}
+          
         </Head>
         <body
           style={{

@@ -106,7 +106,10 @@ const Shortener = () => {
     setCopied(false);
     setLoading(true);
 
-    if (process.env.NODE_ENV === "production" && !isAuthenticated) {
+    if (process.env.NODE_ENV === "production"
+      && !isAuthenticated
+      && process.env.RECAPTCHA_SECRET_KEY
+      && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
       window.grecaptcha.execute(window.captchaId);
       const getCaptchaToken = () => {
         setTimeout(() => {
