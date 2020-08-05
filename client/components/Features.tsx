@@ -15,7 +15,7 @@ const Features = () => (
     backgroundColor={Colors.FeaturesBg}
   >
     <H3 fontSize={[26, 28]} mb={72} light>
-      Kutting edge features.
+      Features
     </H3>
     <Flex
       width={1200}
@@ -28,9 +28,9 @@ const Features = () => (
         Create, protect and delete your links and monitor them with detailed
         statistics.
       </FeaturesItem>
-      <FeaturesItem title="Custom domain" icon="shuffle">
+      {/* <FeaturesItem title="Custom domain" icon="shuffle">
         Use custom domains for your links. Add or remove them for free.
-      </FeaturesItem>
+      </FeaturesItem> */}
       <FeaturesItem title="API" icon="zap">
         Use the provided API to create, delete and get URLs from anywhere.
       </FeaturesItem>
