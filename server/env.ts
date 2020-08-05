@@ -2,8 +2,8 @@ import { cleanEnv, num, str, bool } from "envalid";
 
 const env = cleanEnv(process.env, {
   PORT: num({ default: 3000 }),
-  NEXT_PUBLIC_SITE_NAME: str({ example: "Kutt" }),
-  NEXT_PUBLIC_DEFAULT_DOMAIN: str({ example: "kutt.it" }),
+  NEXT_PUBLIC_SITE_NAME: str({ example: "Kover" }),
+  NEXT_PUBLIC_DEFAULT_DOMAIN: str({ example: "kover.link" }),
   LINK_LENGTH: num({ default: 6 }),
   POSTGRESQL_ADDON_HOST: str({ default: "localhost" }),
   POSTGRESQL_ADDON_PORT: num({ default: 5432 }),
@@ -34,7 +34,7 @@ const env = cleanEnv(process.env, {
   MAIL_PORT: num(),
   MAIL_SECURE: bool({ default: false }),
   MAIL_USER: str(),
-  MAIL_FROM: str({ default: "", example: "Kutt <support@kutt.it>" }),
+  MAIL_FROM: str({ default: "", example: "Kover <support@spacelephant.org>" }),
   MAIL_PASSWORD: str(),
   REPORT_EMAIL: str({ default: "" }),
   CONTACT_EMAIL: str({ default: "" }),

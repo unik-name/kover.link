@@ -1,10 +1,10 @@
 {
-  "name": "Kutt",
-  "short_name": "Kutt",
+  "name": "Kover",
+  "short_name": "Kover",
   "theme_color": "#f3f3f3",
   "background_color": "#f3f3f3",
   "display": "standalone",
-  "description": "Kutt.it is a free and open source URL shortener with custom domains and stats.",
+  "description": "Kover.link is a free and open source URL shortener with custom domains and stats.",
   "Scope": "/",
   "start_url": "/",
   "icons": [

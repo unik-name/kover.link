@@ -3,13 +3,13 @@ import * as p from "../../package.json";
 export default {
   openapi: "3.0.0",
   info: {
-    title: "Kutt.it",
-    description: "API reference for [http://kutt.it](http://kutt.it).\n",
+    title: "kover.link",
+    description: "API reference for [http://kover.link](http://kover.link).\n",
     version: p.version
   },
   servers: [
     {
-      url: "https://kutt.it/api/v2"
+      url: "https://kover.link/api/v2"
     }
   ],
   tags: [

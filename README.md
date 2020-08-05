@@ -1,21 +1,16 @@
-<p align="center"><a href="https://kutt.it" title="kutt.it"><img src="https://raw.githubusercontent.com/thedevs-network/kutt/9d1c873897c3f5b9a1bd0c74dc5d23f2ed01f2ec/static/images/logo-github.png" alt="Kutt.it"></a></p>
+<p align="center"><a href="https://kover.link" title="kover.link"><img src="https://raw.githubusercontent.com/thedevs-network/kutt/9d1c873897c3f5b9a1bd0c74dc5d23f2ed01f2ec/static/images/logo-github.png" alt="Kover.link"></a></p>
 
-# Kutt.it
+# Kover.link
 
-**Kutt** is a modern URL shortener with support for custom domains. Shorten URLs, manage your links and view the click rate statistics.
+**Kover** is a modern URL shortener with support for custom domains. Shorten URLs, manage your links and view the click rate statistics.
 
 _Contributions and bug reports are welcome._
 
-[https://kutt.it](https://kutt.it)
-
-[![Build Status](https://travis-ci.org/thedevs-network/kutt.svg?branch=v2-beta)](https://travis-ci.org/thedevs-network/kutt)
-[![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](https://github.com/thedevs-network/kutt/#contributing)
-[![GitHub license](https://img.shields.io/github/license/thedevs-network/kutt.svg)](https://github.com/thedevs-network/kutt/blob/develop/LICENSE)
-[![Twitter](https://img.shields.io/twitter/url/https/github.com/thedevs-network/kutt/.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fthedevs-network%2Fkutt%2F)
+[https://kover.link](https://kover.link)
 
 ## Migration from v1
 
-The new version of Kutt is here. In version 2, we used TypeScript and we moved from Neo4j to PostgreSQL database in favor of performance and we're working on adding new features.
+The new version of Kover is here. In version 2, we used TypeScript and we moved from Neo4j to PostgreSQL database in favor of performance and we're working on adding new features.
 
 If you're coming from v1, refer to [MIGRATION.md](MIGRATION.md) to migrate data from Neo4j to PostgreSQL.
 
@@ -67,26 +62,12 @@ You need to have [Node.js](https://nodejs.org/), [PostgreSQL](https://www.postgr
 
 You can use Docker to start the app. The simplest way is to just run `docker-compose up` command and then the app should be ready on port "3000".
 
-## Browser Extensions
-
-Download Kutt's extension for web browsers via below links. You can also find the source code on [kutt-extension](https://github.com/abhijithvijayan/kutt-extension).
-
-- [Chrome](https://chrome.google.com/webstore/detail/kutt/pklakpjfiegjacoppcodencchehlfnpd)
-- [Firefox](https://addons.mozilla.org/en-US/firefox/addon/kutt/)
 
 ## API
 
 Visit API v2 documentation on [docs.kutt.it](https://docs.kutt.it)
 
 ## Integrations
-
-### ShareX
-
-You can use Kutt as your default URL shortener in [ShareX](https://getsharex.com/). If you host your custom instance of Kutt, refer to [ShareX wiki](https://github.com/thedevs-network/kutt/wiki/ShareX) on how to setup.
-
-### Alfred Workflow
-
-Download Kutt's official workflow for [Alfred](https://www.alfredapp.com/) app from [alfred-kutt](https://github.com/thedevs-network/alfred-kutt) repository.
 
 ## 3rd Party packages
 | Language   | Link                                                       | Description                                        |
