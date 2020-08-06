@@ -32,7 +32,7 @@ class AppDocument extends Document<Props> {
           />
           <meta
             name="description"
-            content={`${publicRuntimeConfig.SITE_NAME} is a free and open source URL shortener with custom domains and stats.`}
+            content={`${process.env.NEXT_PUBLIC_SITE_NAME} is a free and open source URL shortener with custom domains and stats.`}
           />
           <link
             href="https://fonts.googleapis.com/css?family=Nunito:300,400,700"
@@ -49,13 +49,13 @@ class AppDocument extends Document<Props> {
           <meta property="fb:app_id" content="123456789" />
           <meta
             property="og:url"
-            content={`https://${publicRuntimeConfig.DEFAULT_DOMAIN}`}
+            content={`https://${process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}`}
           />
           <meta property="og:type" content="website" />
-          <meta property="og:title" content={publicRuntimeConfig.SITE_NAME} />
+          <meta property="og:title" content={process.env.NEXT_PUBLIC_SITE_NAME} />
           <meta
             property="og:image"
-            content={`https://${publicRuntimeConfig.DEFAULT_DOMAIN}/images/card.png`}
+            content={`https://${process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}/images/card.png`}
           />
           <meta
             property="og:description"
@@ -63,16 +63,16 @@ class AppDocument extends Document<Props> {
           />
           <meta
             name="twitter:url"
-            content={`https://${publicRuntimeConfig.DEFAULT_DOMAIN}`}
+            content={`https://${process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}`}
           />
-          <meta name="twitter:title" content={publicRuntimeConfig.SITE_NAME} />
+          <meta name="twitter:title" content={process.env.NEXT_PUBLIC_SITE_NAME} />
           <meta
             name="twitter:description"
             content="Free & Open Source Modern URL Shortener"
           />
           <meta
             name="twitter:image"
-            content={`https://${publicRuntimeConfig.DEFAULT_DOMAIN}/images/card.png`}
+            content={`https://${process.env.NEXT_PUBLIC_DEFAULT_DOMAIN}/images/card.png`}
           />
 
           {this.props.styleTags}

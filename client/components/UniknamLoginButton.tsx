@@ -6,9 +6,6 @@ import { fadeIn } from "../helpers/animations";
 import { Button } from "./Button";
 import styled from "styled-components";
 import { Flex } from "reflexbox/styled-components";
-import getConfig from "next/config";
-
-const { publicRuntimeConfig } = getConfig();
 
 const OidcLogin = styled(Flex).attrs({
     as: "div",
@@ -29,8 +26,8 @@ const OidcLogin = styled(Flex).attrs({
         <OidcLogin>        
             <ALink href={APIv2.AuthLoginOidc} title="login/signup oidc" forButton>
                 <Button height={[32, 40]}>
-                { publicRuntimeConfig.OIDC_BUTTON_LOGO_URL ? (
-                    <OidcButtonLogo src={publicRuntimeConfig.OIDC_BUTTON_LOGO_URL} />
+                { process.env.NEXT_PUBLIC_OIDC_BUTTON_LOGO_URL ? (
+                    <OidcButtonLogo src={process.env.NEXT_PUBLIC_OIDC_BUTTON_LOGO_URL} />
                 ) : (
                     <Icon
                     name="login"
@@ -38,7 +35,7 @@ const OidcLogin = styled(Flex).attrs({
                     mr={2}
                     />
                 )}
-                { publicRuntimeConfig.OIDC_BUTTON_LABEL }
+                { process.env.NEXT_PUBLIC_OIDC_BUTTON_LABEL }
                 </Button>
             </ALink>
         </OidcLogin>

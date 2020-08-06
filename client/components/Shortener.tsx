@@ -59,7 +59,7 @@ interface Form {
   showAdvanced?: boolean;
 }
 
-const defaultDomain = publicRuntimeConfig.DEFAULT_DOMAIN;
+const defaultDomain = process.env.NEXT_PUBLIC_DEFAULT_DOMAIN;
 
 const Shortener = () => {
   const { isAuthenticated } = useStoreState(s => s.auth);

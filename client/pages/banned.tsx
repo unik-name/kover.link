@@ -23,7 +23,7 @@ const BannedPage = () => {
         </H2>
         <H4 textAlign="center" normal>
           If you noticed a malware/scam link shortened by{" "}
-          {publicRuntimeConfig.SITE_NAME},{" "}
+          {process.env.NEXT_PUBLIC_SITE_NAME},{" "}
           <Link href="/report">
             <ALink title="Send report">send us a report</ALink>
           </Link>

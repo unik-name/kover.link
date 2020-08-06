@@ -56,8 +56,8 @@ export const createLink = [
         /^(?!https?)(\w+):\/\//.test(value)
     )
     .withMessage("URL is not valid.")
-    .custom(value => URL.parse(value).host !== env.DEFAULT_DOMAIN)
-    .withMessage(`${env.DEFAULT_DOMAIN} URLs are not allowed.`),
+    .custom(value => URL.parse(value).host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN)
+    .withMessage(`${env.NEXT_PUBLIC_DEFAULT_DOMAIN} URLs are not allowed.`),
   body("password")
     .optional({ nullable: true, checkFalsy: true })
     .custom(checkUser)
@@ -114,7 +114,7 @@ export const createLink = [
     .customSanitizer(value => value.toLowerCase())
     .customSanitizer(value => URL.parse(value).hostname || value)
     .custom(async (address, { req }) => {
-      if (address === env.DEFAULT_DOMAIN) {
+      if (address === env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
         req.body.domain = null;
         return;
       }
@@ -144,8 +144,8 @@ export const editLink = [
         /^(?!https?)(\w+):\/\//.test(value)
     )
     .withMessage("URL is not valid.")
-    .custom(value => URL.parse(value).host !== env.DEFAULT_DOMAIN)
-    .withMessage(`${env.DEFAULT_DOMAIN} URLs are not allowed.`),
+    .custom(value => URL.parse(value).host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN)
+    .withMessage(`${env.NEXT_PUBLIC_DEFAULT_DOMAIN} URLs are not allowed.`),
   body("address")
     .optional({ checkFalsy: true, nullable: true })
     .isString()
@@ -205,7 +205,7 @@ export const addDomain = [
       return parsed.hostname || parsed.href;
     })
     .custom(value => urlRegex({ exact: true, strict: false }).test(value))
-    .custom(value => value !== env.DEFAULT_DOMAIN)
+    .custom(value => value !== env.NEXT_PUBLIC_DEFAULT_DOMAIN)
     .withMessage("You can't use the default domain.")
     .custom(async value => {
       const domain = await query.domain.find({ address: value });
@@ -244,8 +244,12 @@ export const reportLink = [
       checkNull: true
     })
     .customSanitizer(addProtocol)
-    .custom(value => URL.parse(value).hostname === env.DEFAULT_DOMAIN)
-    .withMessage(`You can only report a ${env.DEFAULT_DOMAIN} link.`)
+    .custom(
+      value => URL.parse(value).hostname === env.NEXT_PUBLIC_DEFAULT_DOMAIN
+    )
+    .withMessage(
+      `You can only report a ${env.NEXT_PUBLIC_DEFAULT_DOMAIN} link.`
+    )
 ];
 
 export const banLink = [
@@ -368,7 +372,7 @@ export const malware = async (user: User, target: string) => {
     `https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${env.GOOGLE_SAFE_BROWSING_KEY}`,
     {
       client: {
-        clientId: env.DEFAULT_DOMAIN.toLowerCase().replace(".", ""),
+        clientId: env.NEXT_PUBLIC_DEFAULT_DOMAIN.toLowerCase().replace(".", ""),
         clientVersion: "1.0.0"
       },
       threatInfo: {

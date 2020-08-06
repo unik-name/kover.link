@@ -75,7 +75,7 @@ class MyApp extends App<any> {
       <>
         <Head>
           <title>
-            {publicRuntimeConfig.SITE_NAME} | Modern Open Source URL shortener.
+            {process.env.NEXT_PUBLIC_SITE_NAME} | Modern Open Source URL shortener.
           </title>
         </Head>
         <StoreProvider store={this.store}>

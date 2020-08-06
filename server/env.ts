@@ -2,8 +2,8 @@ import { cleanEnv, num, str, bool } from "envalid";
 
 const env = cleanEnv(process.env, {
   PORT: num({ default: 3000 }),
-  SITE_NAME: str({ example: "Kover" }),
-  DEFAULT_DOMAIN: str({ example: "kover.link" }),
+  NEXT_PUBLIC_SITE_NAME: str({ example: "Kover" }),
+  NEXT_PUBLIC_DEFAULT_DOMAIN: str({ example: "kover.link" }),
   LINK_LENGTH: num({ default: 6 }),
   POSTGRESQL_ADDON_HOST: str({ default: "localhost" }),
   POSTGRESQL_ADDON_PORT: num({ default: 5432 }),
@@ -44,8 +44,8 @@ const env = cleanEnv(process.env, {
   OIDC_DISCOVERY_URL: str(),
   OIDC_CLIENT_ID: str(),
   OIDC_CLIENT_SECRET: str(),
-  OIDC_BUTTON_LABEL: str(),
-  OIDC_BUTTON_LOGO_URL: str()
+  NEXT_PUBLIC_OIDC_BUTTON_LABEL: str(),
+  NEXT_PUBLIC_OIDC_BUTTON_LOGO_URL: str()
 });
 
 export default env;
