@@ -113,7 +113,7 @@ const Header: FC = () => {
           >
             <Li>
               <ALink
-                href="//github.com/spacelephant/kover.link"
+                href="//github.com/unik-name/kover.link"
                 target="_blank"
                 rel="noopener noreferrer"
                 title="GitHub"

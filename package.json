@@ -1,5 +1,5 @@
 {
-  "name": "kutt",
+  "name": "kover.link",
   "version": "2.3.16",
   "description": "Modern URL shortener.",
   "main": "./production-server/server.js",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheDevs-Network/kutt.git"
+    "url": "git+https://github.com/unik-name/kover.link.git"
   },
   "keywords": [
     "url-shortener"
@@ -31,9 +31,9 @@
   "author": "Pouria Ezzati <ezzati.upt@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheDevs-Network/kutt/issues"
+    "url": "https://github.com/unik-name/kover.link/issues"
   },
-  "homepage": "https://github.com/TheDevs-Network/kutt#readme",
+  "homepage": "https://github.com/unik-name/kover.link#readme",
   "dependencies": {
     "axios": "^0.19.1",
     "babel-plugin-inline-react-svg": "^1.1.0",

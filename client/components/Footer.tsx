@@ -33,7 +33,7 @@ const Footer: FC = () => {
         </ALink>
         .{" | "}
         <ALink
-          href="https://github.com/spacelephant/kover.link"
+          href="https://github.com/unik-name/kover.link"
           title="GitHub"
           target="_blank"
         >
