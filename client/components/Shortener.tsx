@@ -1,7 +1,7 @@
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useFormState } from "react-use-form-state";
 import { Flex } from "reflexbox/styled-components";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { useStoreActions, useStoreState } from "../store";
@@ -58,7 +58,6 @@ const defaultDomain = process.env.NEXT_PUBLIC_DEFAULT_DOMAIN;
 
 const Shortener = () => {
   const { isAuthenticated } = useStoreState(s => s.auth);
-  const domains = useStoreState(s => s.settings.domains);
   const submit = useStoreActions(s => s.links.submit);
   const [link, setLink] = useState<Link | null>(null);
   const [message, setMessage] = useMessage(10000);
@@ -67,23 +66,28 @@ const Shortener = () => {
   const [formState, { raw, password, text, select, label }] = useFormState<
     Form
   >(
-    { showAdvanced: false },
+    { showAdvanced: false, target: "" },
     {
       withIds: true,
       onChange(e, stateValues, nextStateValues) {
         if (stateValues.showAdvanced && !nextStateValues.showAdvanced) {
-          // formState.clear();
           formState.setField("target", stateValues.target);
         }
+        sessionStorage.setItem("linkCandidate", nextStateValues.target)
       }
     }
   );
+
+  useEffect(() => {
+    formState.setField("target", sessionStorage.getItem("linkCandidate") || "");
+  }, []);
 
   const submitLink = async (reCaptchaToken?: string) => {
     try {
       const link = await submit({ ...formState.values, reCaptchaToken });
       setLink(link);
       formState.clear();
+      sessionStorage.removeItem("linkCandidate");
     } catch (err) {
       let message;
 
