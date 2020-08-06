@@ -30,7 +30,7 @@ const SettingsPage: NextPage = () => {
     <AppWrapper>
       <Col width={600} maxWidth="90%" alignItems="flex-start" pb={80} mt={4}>
         <H1 alignItems="center" fontSize={[24, 28]} light>
-          Welcome,
+          Welcome!
         </H1>
         <Divider mt={4} mb={48} />
         {/* <SettingsDomain /> */}

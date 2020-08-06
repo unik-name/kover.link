@@ -134,9 +134,8 @@ const Shortener = () => {
     <H1 fontSize={[25, 27, 32]} light>
       Kover your links{" "}
       <Span style={{ borderBottom: "2px dotted #999" }} light>
-        and shorten it!
+        and shorten them!
       </Span>
-      .
     </H1>
   );
 
