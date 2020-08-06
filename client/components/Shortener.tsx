@@ -3,6 +3,7 @@ import { useFormState } from "react-use-form-state";
 import { Flex } from "reflexbox/styled-components";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import getConfig from "next/config";
 
 import { useStoreActions, useStoreState } from "../store";
 import { Checkbox, TextInput } from "./Input";
@@ -14,6 +15,8 @@ import { Link } from "../store/links";
 import Animation from "./Animation";
 import { Colors } from "../consts";
 import Icon from "./Icon";
+
+const { publicRuntimeConfig } = getConfig();
 
 const SubmitIconWrapper = styled.div`
   content: "";
@@ -51,10 +54,12 @@ interface Form {
   domain?: string;
   customurl?: string;
   password?: string;
+  description?: string;
+  expire_in?: string;
   showAdvanced?: boolean;
 }
 
-const defaultDomain = process.env.NEXT_PUBLIC_DEFAULT_DOMAIN;
+const defaultDomain = publicRuntimeConfig.DEFAULT_DOMAIN;
 
 const Shortener = () => {
   const { isAuthenticated } = useStoreState(s => s.auth);
@@ -110,10 +115,11 @@ const Shortener = () => {
     setCopied(false);
     setLoading(true);
 
-    if (process.env.NODE_ENV === "production"
-      && !isAuthenticated
-      && process.env.RECAPTCHA_SECRET_KEY
-      && process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY) {
+    if (
+      process.env.NODE_ENV === "production" &&
+      !!publicRuntimeConfig.RECAPTCHA_SITE_KEY &&
+      !isAuthenticated
+    ) {
       window.grecaptcha.execute(window.captchaId);
       const getCaptchaToken = () => {
         setTimeout(() => {
@@ -252,54 +258,104 @@ const Shortener = () => {
         alignSelf="flex-start"
       />
       {formState.values.showAdvanced && (
-        <Flex mt={4} flexDirection={["column", "row"]}>
-          <Col mb={[3, 0]} ml={[0, 24]}>
-            <Text
-              as="label"
-              {...label("customurl")}
-              fontSize={[14, 15]}
-              mb={2}
-              bold
-            >
-              {formState.values.domain || defaultDomain}/
-            </Text>
-            <TextInput
-              {...text("customurl")}
-              placeholder="Custom address..."
-              autocomplete="off"
-              data-lpignore
-              pl={[3, 24]}
-              pr={[3, 24]}
-              placeholderSize={[13, 14]}
-              fontSize={[14, 15]}
-              height={[40, 44]}
-              width={[210, 240]}
-            />
-          </Col>
-          <Col ml={[0, 24]}>
-            <Text
-              as="label"
-              {...label("password")}
-              fontSize={[14, 15]}
-              mb={2}
-              bold
-            >
-              Password:
-            </Text>
-            <TextInput
-              {...password("password")}
-              placeholder="Password..."
-              autocomplete="off"
-              data-lpignore
-              pl={[3, 24]}
-              pr={[3, 24]}
-              placeholderSize={[13, 14]}
-              fontSize={[14, 15]}
-              height={[40, 44]}
-              width={[210, 240]}
-            />
-          </Col>
-        </Flex>
+        <div>
+          <Flex mt={4} flexDirection={["column", "row"]}>
+            <Col mb={[3, 0]}>
+              <Text
+                as="label"
+                {...label("customurl")}
+                fontSize={[14, 15]}
+                mb={2}
+                bold
+              >
+                {formState.values.domain || defaultDomain}/
+              </Text>
+              <TextInput
+                {...text("customurl")}
+                placeholder="Custom address..."
+                autocomplete="off"
+                data-lpignore
+                pl={[3, 24]}
+                pr={[3, 24]}
+                placeholderSize={[13, 14]}
+                fontSize={[14, 15]}
+                height={[40, 44]}
+                width={[1, 210, 240]}
+              />
+            </Col>
+            <Col ml={[0, 24]}>
+              <Text
+                as="label"
+                {...label("password")}
+                fontSize={[14, 15]}
+                mb={2}
+                bold
+              >
+                Password:
+              </Text>
+              <TextInput
+                {...password("password")}
+                placeholder="Password..."
+                autocomplete="off"
+                data-lpignore
+                pl={[3, 24]}
+                pr={[3, 24]}
+                placeholderSize={[13, 14]}
+                fontSize={[14, 15]}
+                height={[40, 44]}
+                width={[1, 210, 240]}
+              />
+            </Col>
+          </Flex>
+          <Flex mt={[3]} flexDirection={["column", "row"]}>
+            <Col>
+              <Text
+                as="label"
+                {...label("expire_in")}
+                fontSize={[14, 15]}
+                mb={2}
+                bold
+              >
+                Expire in:
+              </Text>
+              <TextInput
+                {...text("expire_in")}
+                placeholder="2 minutes/hours/days"
+                data-lpignore
+                pl={[3, 24]}
+                pr={[3, 24]}
+                placeholderSize={[13, 14]}
+                fontSize={[14, 15]}
+                height={[40, 44]}
+                width={[1, 210, 240]}
+                maxWidth="100%"
+              />
+            </Col>
+            <Col width={2 / 3} ml={[0, 26]}>
+              <Text
+                as="label"
+                {...label("description")}
+                fontSize={[14, 15]}
+                mb={2}
+                bold
+              >
+                Description:
+              </Text>
+              <TextInput
+                {...text("description")}
+                placeholder="Description"
+                data-lpignore
+                pl={[3, 24]}
+                pr={[3, 24]}
+                placeholderSize={[13, 14]}
+                fontSize={[14, 15]}
+                height={[40, 44]}
+                width={1}
+                maxWidth="100%"
+              />
+            </Col>
+          </Flex>
+        </div>
       )}
     </Col>
   );

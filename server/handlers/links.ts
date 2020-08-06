@@ -42,7 +42,15 @@ export const get: Handler = async (req, res) => {
 };
 
 export const create: Handler = async (req: CreateLinkReq, res) => {
-  const { reuse, password, customurl, target, domain } = req.body;
+  const {
+    reuse,
+    password,
+    customurl,
+    description,
+    target,
+    domain,
+    expire_in
+  } = req.body;
   const domain_id = domain ? domain.id : null;
 
   const targetDomain = URL.parse(target).hostname;
@@ -85,7 +93,9 @@ export const create: Handler = async (req: CreateLinkReq, res) => {
     password,
     address,
     domain_id,
+    description,
     target,
+    expire_in,
     user_id: req.user && req.user.id
   });
 
@@ -99,7 +109,7 @@ export const create: Handler = async (req: CreateLinkReq, res) => {
 };
 
 export const edit: Handler = async (req, res) => {
-  const { address, target } = req.body;
+  const { address, target, description, expire_in } = req.body;
 
   if (!address && !target) {
     throw new CustomError("Should at least update one field.");
@@ -142,7 +152,9 @@ export const edit: Handler = async (req, res) => {
     },
     {
       ...(address && { address }),
-      ...(target && { target })
+      ...(description && { description }),
+      ...(target && { target }),
+      ...(expire_in && { expire_in })
     }
   );
 
@@ -257,7 +269,7 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
   // 1. If custom domain, get domain info
   const { host } = req.headers;
   const domain =
-    host !== env.NEXT_PUBLIC_DEFAULT_DOMAIN
+    host !== env.DEFAULT_DOMAIN
       ? await query.domain.find({ address: host })
       : null;
 
@@ -365,7 +377,7 @@ export const redirectCustomDomain: Handler = async (req, res, next) => {
     path
   } = req;
 
-  if (host === env.NEXT_PUBLIC_DEFAULT_DOMAIN) {
+  if (host === env.DEFAULT_DOMAIN) {
     return next();
   }
 
@@ -378,7 +390,7 @@ export const redirectCustomDomain: Handler = async (req, res, next) => {
     const domain = await query.domain.find({ address: host });
     const redirectURL = domain
       ? domain.homepage
-      : `https://${env.NEXT_PUBLIC_DEFAULT_DOMAIN + path}`;
+      : `https://${env.DEFAULT_DOMAIN + path}`;
 
     return res.redirect(301, redirectURL);
   }

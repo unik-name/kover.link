@@ -70,12 +70,14 @@ interface IP {
 }
 
 interface Link {
-  id: number;
   address: string;
-  banned: boolean;
   banned_by_id?: number;
+  banned: boolean;
   created_at: string;
+  description?: string;
   domain_id?: number;
+  expire_in: string;
+  id: number;
   password?: string;
   target: string;
   updated_at: string;

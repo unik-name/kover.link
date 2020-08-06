@@ -1,4 +1,5 @@
 import { Flex } from "reflexbox/styled-components";
+import getConfig from "next/config";
 import React, { FC } from "react";
 import Router from "next/router";
 import useMedia from "use-media";
@@ -10,6 +11,8 @@ import { RowCenterV } from "./Layout";
 import { Button } from "./Button";
 import ALink from "./ALink";
 import UniknameLoginButton from "../components/UniknamLoginButton";
+
+const { publicRuntimeConfig } = getConfig();
 
 const Li = styled(Flex).attrs({ ml: [12, 24, 32] })`
   a {
@@ -98,7 +101,7 @@ const Header: FC = () => {
             }}
           >
             <img src="/images/logo.svg" alt="" />
-            {process.env.NEXT_PUBLIC_SITE_NAME}
+            {publicRuntimeConfig.SITE_NAME}
           </a>
         </LogoImage>
         {!isMobile && (

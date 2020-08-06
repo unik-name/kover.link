@@ -2,8 +2,8 @@ import { cleanEnv, num, str, bool } from "envalid";
 
 const env = cleanEnv(process.env, {
   PORT: num({ default: 3000 }),
-  NEXT_PUBLIC_SITE_NAME: str({ example: "Kover" }),
-  NEXT_PUBLIC_DEFAULT_DOMAIN: str({ example: "kover.link" }),
+  SITE_NAME: str({ example: "Kover" }),
+  DEFAULT_DOMAIN: str({ example: "kover.link" }),
   LINK_LENGTH: num({ default: 6 }),
   POSTGRESQL_ADDON_HOST: str({ default: "localhost" }),
   POSTGRESQL_ADDON_PORT: num({ default: 5432 }),
@@ -25,7 +25,7 @@ const env = cleanEnv(process.env, {
   CUSTOM_DOMAIN_USE_HTTPS: bool({ default: false }),
   JWT_SECRET: str(),
   ADMIN_EMAILS: str({ default: "" }),
-  NEXT_PUBLIC_RECAPTCHA_SITE_KEY: str({ default: "" }),
+  RECAPTCHA_SITE_KEY: str({ default: "" }),
   RECAPTCHA_SECRET_KEY: str({ default: "" }),
   GOOGLE_SAFE_BROWSING_KEY: str({ default: "" }),
   GOOGLE_ANALYTICS: str({ default: "" }),
@@ -44,8 +44,8 @@ const env = cleanEnv(process.env, {
   OIDC_DISCOVERY_URL: str(),
   OIDC_CLIENT_ID: str(),
   OIDC_CLIENT_SECRET: str(),
-  NEXT_PUBLIC_OIDC_BUTTON_LABEL: str(),
-  NEXT_PUBLIC_OIDC_BUTTON_LOGO_URL: str()
+  OIDC_BUTTON_LABEL: str(),
+  OIDC_BUTTON_LOGO_URL: str()
 });
 
 export default env;

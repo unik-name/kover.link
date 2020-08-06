@@ -24,6 +24,7 @@ router.post(
   asyncHandler(auth.jwt),
   asyncHandler(auth.oidc),
   asyncHandler(auth.recaptcha),
+  asyncHandler(auth.cooldown),
   validators.createLink,
   asyncHandler(helpers.verify),
   asyncHandler(link.create)

@@ -25,12 +25,12 @@ const resetEmailTemplatePath = path.join(__dirname, "template-reset.html");
 const verifyEmailTemplatePath = path.join(__dirname, "template-verify.html");
 const resetEmailTemplate = fs
   .readFileSync(resetEmailTemplatePath, { encoding: "utf-8" })
-  .replace(/{{domain}}/gm, env.NEXT_PUBLIC_DEFAULT_DOMAIN)
-  .replace(/{{site_name}}/gm, env.NEXT_PUBLIC_SITE_NAME);
+  .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
+  .replace(/{{site_name}}/gm, env.SITE_NAME);
 const verifyEmailTemplate = fs
   .readFileSync(verifyEmailTemplatePath, { encoding: "utf-8" })
-  .replace(/{{domain}}/gm, env.NEXT_PUBLIC_DEFAULT_DOMAIN)
-  .replace(/{{site_name}}/gm, env.NEXT_PUBLIC_SITE_NAME);
+  .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
+  .replace(/{{site_name}}/gm, env.SITE_NAME);
 
 export const verification = async (user: User) => {
   const mail = await transporter.sendMail({
@@ -39,12 +39,12 @@ export const verification = async (user: User) => {
     subject: "Verify your account",
     text: verifyMailText
       .replace(/{{verification}}/gim, user.verification_token)
-      .replace(/{{domain}}/gm, env.NEXT_PUBLIC_DEFAULT_DOMAIN)
-      .replace(/{{site_name}}/gm, env.NEXT_PUBLIC_SITE_NAME),
+      .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
+      .replace(/{{site_name}}/gm, env.SITE_NAME),
     html: verifyEmailTemplate
       .replace(/{{verification}}/gim, user.verification_token)
-      .replace(/{{domain}}/gm, env.NEXT_PUBLIC_DEFAULT_DOMAIN)
-      .replace(/{{site_name}}/gm, env.NEXT_PUBLIC_SITE_NAME)
+      .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
+      .replace(/{{site_name}}/gm, env.SITE_NAME)
   });
 
   if (!mail.accepted.length) {
@@ -59,10 +59,10 @@ export const resetPasswordToken = async (user: User) => {
     subject: "Reset your password",
     text: resetMailText
       .replace(/{{resetpassword}}/gm, user.reset_password_token)
-      .replace(/{{domain}}/gm, env.NEXT_PUBLIC_DEFAULT_DOMAIN),
+      .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN),
     html: resetEmailTemplate
       .replace(/{{resetpassword}}/gm, user.reset_password_token)
-      .replace(/{{domain}}/gm, env.NEXT_PUBLIC_DEFAULT_DOMAIN)
+      .replace(/{{domain}}/gm, env.DEFAULT_DOMAIN)
   });
 
   if (!mail.accepted.length) {

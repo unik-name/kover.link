@@ -8,10 +8,10 @@ import axios from "axios";
 
 import { CustomError } from "../utils";
 import * as utils from "../utils";
+import * as redis from "../redis";
+import queries from "../queries";
 import * as mail from "../mail";
 import query from "../queries";
-import knex from "../knex";
-import * as redis from "../redis";
 import env from "../env";
 
 const authenticate = (
@@ -38,7 +38,7 @@ const authenticate = (
       }
 
       if (user && user.banned) {
-        throw new CustomError("Your are banned from using this website.", 403);
+        throw new CustomError("You're banned from using this website.", 403);
       }
 
       if (user) {
@@ -67,14 +67,10 @@ export const cooldown: Handler = async (req, res, next) => {
   const cooldownConfig = env.NON_USER_COOLDOWN;
   if (req.user || !cooldownConfig) return next();
 
-  const ip = await knex<IP>("ips")
-    .where({ ip: req.realIP.toLowerCase() })
-    .andWhere(
-      "created_at",
-      ">",
-      subMinutes(new Date(), cooldownConfig).toISOString()
-    )
-    .first();
+  const ip = await queries.ip.find({
+    ip: req.realIP.toLowerCase(),
+    created_at: [">", subMinutes(new Date(), cooldownConfig).toISOString()]
+  });
 
   if (ip) {
     const timeToWait =
@@ -88,13 +84,8 @@ export const cooldown: Handler = async (req, res, next) => {
 };
 
 export const recaptcha: Handler = async (req, res, next) => {
-  if (
-    env.isDev ||
-    req.user ||
-    !env.RECAPTCHA_SECRET_KEY ||
-    !env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-  )
-    return next();
+  if (env.isDev || req.user) return next();
+  if (!env.RECAPTCHA_SECRET_KEY) return next();
 
   const isReCaptchaValid = await axios({
     method: "post",
