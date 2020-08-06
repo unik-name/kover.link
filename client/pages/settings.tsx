@@ -28,14 +28,14 @@ const SettingsPage: NextPage = () => {
 
   return (
     <AppWrapper>
-      <Col width={600} maxWidth="90%" alignItems="flex-start" pb={80} mt={4}>
-        <H1 alignItems="center" fontSize={[24, 28]} light>
+      <Col width={600} maxWidth="90%" alignItems="flex-start" pb={80} mt={4} flex={1}>
+        <H1 alignItems="center" fontSize={[24, 28]} light mb={48}>
           Welcome!
         </H1>
-        <Divider mt={4} mb={48} />
+        {/* <Divider mt={4} mb={48} /> */}
         {/* <SettingsDomain /> */}
         {/* { changePassword } */}
-        <Divider mt={4} mb={48} />
+        {/* <Divider mt={4} mb={48} /> */}
         <SettingsApi />
         {/* <Divider mt={4} mb={48} /> */}
         {/* <SettingsDeleteAccount /> */}
