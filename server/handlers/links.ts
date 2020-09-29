@@ -6,6 +6,7 @@ import isbot from "isbot";
 import next from "next";
 import URL from "url";
 import dns from "dns";
+import MatomoTracker from "matomo-tracker";
 
 import * as validators from "./validators";
 import { CreateLinkReq } from "./types";
@@ -322,6 +323,25 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
         aip: 1
       })
       .send();
+  }
+
+  // 8. Create Matomo visit
+  if (
+    env.APP_URL &&
+    env.MATOMO_SITE_ID &&
+    env.MATOMO_URL &&
+    env.MATOMO_AUTH_TOKEN &&
+    !isBot
+  ) {
+    const matomo = new MatomoTracker(env.MATOMO_SITE_ID, env.MATOMO_URL);
+    matomo.track({
+      url: `${env.APP_URL}/${address}`,
+      ua: req.headers["user-agent"],
+      urlref: req.headers["referer"],
+      lang: req.headers["Accept-Language"],
+      cip: req.realIP,
+      token_auth: env.MATOMO_AUTH_TOKEN
+    });
   }
 
   // 10. Redirect to target
