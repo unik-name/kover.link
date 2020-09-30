@@ -7,8 +7,9 @@ import { CustomError } from "../utils";
 import env from "../env";
 
 export const ip: Handler = (req, res, next) => {
-  req.realIP =
-    (req.headers["x-real-ip"] as string) || req.connection.remoteAddress || "";
+  // Workaround when being behind a standard reverse-proxy
+  req.realIP = req.ip;
+  // (req.headers["x-real-ip"] as string) || req.connection.remoteAddress || "";
   return next();
 };
 
