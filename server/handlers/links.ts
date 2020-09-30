@@ -338,7 +338,7 @@ export const redirect = (app: ReturnType<typeof next>): Handler => async (
       url: `${env.APP_URL}/${address}`,
       ua: req.headers["user-agent"],
       urlref: req.headers["referer"],
-      lang: req.headers["Accept-Language"],
+      lang: req.headers["accept-language"],
       cip: req.realIP,
       token_auth: env.MATOMO_AUTH_TOKEN
     });
