@@ -609,7 +609,7 @@ const LinksTable: FC = () => {
   );
 
   return (
-    <Col width={1200} maxWidth="95%" margin="40px 0 120px" my={6}>
+    <Col width="80%" maxWidth="95%" margin="40px 0 120px" my={6}>
       <H2 mb={3} light>
         Recent shortened links.
       </H2>
