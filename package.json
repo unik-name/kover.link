@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/unik-name/kover.link#readme",
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "bcryptjs": "^2.4.3",
     "bull": "^3.12.1",
