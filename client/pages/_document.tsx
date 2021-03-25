@@ -34,6 +34,10 @@ class AppDocument extends Document<Props> {
             name="description"
             content={`${process.env.NEXT_PUBLIC_SITE_NAME} is a free and open source URL shortener with custom domains and stats.`}
           />
+          <meta
+            name="uns-url-checker-verification"
+            content="z2vr1nxKMVlM0LO-dZ90kZDO5mnfoNismbXfhWLMcbyduBBUny1bfiycBetowuHTm5ZEu3RK4R0oyobCkYu7tQ"
+          />
           <link
             href="https://fonts.googleapis.com/css?family=Nunito:300,400,700"
             rel="stylesheet"
