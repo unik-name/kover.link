@@ -9,10 +9,23 @@ export default app => {
 
   router.get("/login/oidc", asyncHandler(auth.oidc));
 
-  router.get("/login/oidc/cb", asyncHandler(auth.oidcCallback), (req, res) => {
-    const token = utils.signToken(req.user);
-    app.render(req, res, "/finish-oidc-login", { token });
-  });
+  // Redirect User to home page if oidc authentication fails
+  const onOIDCCbError = (req, res, next, err, user) => {
+    if (user) {
+      return next(err);
+    } else {
+      app.render(req, res, "/");
+    }
+  };
+
+  router.get(
+    "/login/oidc/cb",
+    asyncHandler(auth.oidcCallback(onOIDCCbError)),
+    (req, res) => {
+      const token = utils.signToken(req.user);
+      app.render(req, res, "/finish-oidc-login", { token });
+    }
+  );
 
   router.post("/renew", asyncHandler(auth.jwt), asyncHandler(auth.token));
 

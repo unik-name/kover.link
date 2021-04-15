@@ -17,13 +17,19 @@ import env from "../env";
 const authenticate = (
   type: "jwt" | "local" | "localapikey" | "oidc",
   error: string,
-  isStrict = true
+  isStrict = true,
+  doSomethingOnLoginError?: (req, res, next, err, user) => any
 ) =>
   async function auth(req, res, next) {
     if (req.user) return next();
 
     passport.authenticate(type, (err, user) => {
-      if (err) return next(err);
+      if (err) {
+        if (doSomethingOnLoginError) {
+          return doSomethingOnLoginError(req, res, next, err, user);
+        }
+        return next(err);
+      }
 
       if (!user && isStrict) {
         throw new CustomError(error, 401);
@@ -61,7 +67,9 @@ export const apikey = authenticate(
   false
 );
 export const oidc = authenticate("oidc", "Unauthorized.", false);
-export const oidcCallback = authenticate("oidc", "Unauthorized.", true);
+export const oidcCallback = doSomethingOnLoginError => {
+  return authenticate("oidc", "Unauthorized.", true, doSomethingOnLoginError);
+};
 
 export const cooldown: Handler = async (req, res, next) => {
   const cooldownConfig = env.NON_USER_COOLDOWN;
